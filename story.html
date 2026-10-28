@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дом со стенами из мёртвых — Narrator's Horrors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English:ital@1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { ink: '#0c0c0d', bone: '#e8e1d2', ember: '#e9a54b', ash: '#8a857b' },
+      fontFamily: { fell: ['"IM Fell English"', 'serif'], garamond: ['"Cormorant Garamond"', 'serif'], body: ['"EB Garamond"', 'serif'] }
+    } }
+  }
+</script>
+<style>
+  body { background: #0c0c0d; }
+  .fog { position: fixed; inset: -20%; pointer-events: none; mix-blend-mode: screen;
+         background: radial-gradient(40% 30% at 25% 30%, rgba(150,150,150,.13), transparent 70%),
+                     radial-gradient(40% 35% at 80% 75%, rgba(130,130,130,.12), transparent 70%);
+         animation: drift 50s ease-in-out infinite alternate; }
+  @keyframes drift { to { transform: translate(6%, -4%) scale(1.12); } }
+  .vignette { position: fixed; inset: 0; pointer-events: none;
+              background: radial-gradient(ellipse at 50% 30%, transparent 30%, rgba(0,0,0,.85) 100%); }
+  .grain { position: fixed; inset: 0; pointer-events: none; opacity: .2; mix-blend-mode: overlay;
+           background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  .title { filter: url(#rough); text-shadow: 0 0 20px rgba(232,225,210,.2); }
+
+  /* текст истории */
+  .story p { margin-bottom: 1.4em; text-indent: 1.6em; hyphens: auto; }
+  .story p.first { text-indent: 0; }
+  .story p.first::first-letter { font-family: 'IM Fell English', serif; font-style: italic; float: left;
+      font-size: 4.6em; line-height: .8; padding: .08em .1em 0 0; color: #e9a54b; }
+  .story hr { border: 0; height: 1px; margin: 2.5rem auto; width: 40%;
+              background: linear-gradient(90deg, transparent, #8a857b, transparent); }
+
+  #progress { transform-origin: 0 50%; transform: scaleX(0); }
+  ::selection { background: #e9a54b; color: #0c0c0d; }
+  a:focus-visible, button:focus-visible { outline: 2px solid #e9a54b; outline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) { .fog { animation: none; } }
+</style>
+</head>
+<body class="font-body text-bone antialiased">
+
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="3" seed="4" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="4"/></filter>
+</svg>
+
+<div class="fog"></div>
+<div class="vignette"></div>
+<div class="grain"></div>
+<div class="fixed inset-x-0 top-0 z-30 h-0.5 bg-ink/60"><div id="progress" class="h-full bg-ember"></div></div>
+
+<header class="relative z-20 mx-auto flex max-w-3xl items-center justify-between px-6 pt-8 font-garamond text-lg italic font-semibold">
+  <a href="index.html" class="transition hover:text-ember">‹ К фонарю</a>
+  <div class="flex items-center gap-2" role="group" aria-label="Размер текста">
+    <button id="smaller" class="grid h-9 w-9 place-items-center rounded-full border border-ash/60 transition hover:border-ember hover:text-ember" aria-label="Уменьшить текст">A−</button>
+    <button id="bigger" class="grid h-9 w-9 place-items-center rounded-full border border-ash/60 transition hover:border-ember hover:text-ember" aria-label="Увеличить текст">A+</button>
+  </div>
+</header>
+
+<main class="relative z-10 mx-auto max-w-3xl px-6 pb-24 pt-14">
+
+  <!-- Заголовок истории -->
+  <div class="text-center">
+    <p class="font-garamond text-lg italic font-semibold text-ash">Реальная история, Оберн, Пенсильвания</p>
+    <h1 class="title mt-3 font-fell text-5xl italic leading-tight sm:text-7xl">Дом со стенами<br>из мёртвых</h1>
+    <p class="mt-6 font-garamond text-lg italic text-bone/70">Чтение — около 4 минут</p>
+  </div>
+
+  <hr class="mx-auto my-10 h-px w-1/3 border-0 bg-gradient-to-r from-transparent via-ash to-transparent">
+
+  <!-- ============================================================
+       ТЕКСТ ИСТОРИИ — вставляйте сюда.
+       Каждый абзац — отдельный <p>. Первому абзацу добавьте class="first".
+       Разделитель сцен: <hr>
+       ============================================================ -->
+  <article id="story" class="story text-[1.25rem] leading-[1.85] text-bone/90 sm:text-[1.35rem]">
+    <p class="first">Городок Оберн лежит в округе Шуйлкилл, в самом сердце Пенсильвании. Здесь до сих пор живут потомки немецких переселенцев, которых зовут пенсильванскими голландцами. Здесь любят старые дома, и дома отвечают взаимностью: они хранят всё, что в них когда-либо оставили.</p>
+    <p>Один из таких домов, построенный, судя по всему, ещё в тридцатые годы прошлого века, летом 2012 года купила семья Бретзиус. Они считали его домом своей мечты. Как все, кто покупает старину, они понимали, что за красивыми стенами может прятаться гнилая балка или дряхлая проводка. Они не знали, что прячется там на самом деле.</p>
+    <hr>
+    <p class="first">Началось всё с простого желания утеплить одну из комнат. Рабочие сняли гипсокартон, чтобы добраться до пустот в стене, и обнаружили, что пустот нет. Стена была уже заполнена.</p>
+    <p>Внутри лежали животные. Десятки тушек, по сообщениям журналистов, среди них были куры, кости и целые скелеты. Каждое тело было аккуратно завернуто в газету, и газеты были из тридцатых и сороковых годов. Рядом нашлись початые баночки со специями и другие мелочи, которым нечего делать в стене: словно кто-то не просто прятал мёртвых, а оставлял вместе с ними подношение.</p>
+    <p>Это не было похоже на небрежность. Кто-то делал это сознательно, неторопливо, годами, пока дом был ещё новым и пах свежей краской.</p>
+    <hr>
+    <p class="first">Семья рассказала об этом журналистам телеканала WNEP только в феврале 2015 года, но разбирали стены они уже давно, с самого 2012-го. Запах не уходил. Из-за плесени, которая разрослась там, где столько лет гнили тела, заболели почти все в доме. Они не были уверены, что нашли всё: чтобы проверить остальные стены, их пришлось бы вскрывать одну за другой.</p>
+    <p>Очистка обошлась примерно в двадцать тысяч долларов. Страховая компания, по сообщениям, отказалась платить: проблема, мол, возникла задолго до покупки. Семья открыла сбор средств, чтобы вернуть себе собственный дом.</p>
+    <hr>
+    <p class="first">Зачем? Ответа никто не знает наверняка, но знатоки местной истории предложили версию, от которой становится ещё холоднее.</p>
+    <p>Среди пенсильванских немцев веками жила народная магия, которую называют пау-вау. Знахари читали заговоры, лечили болезни, отводили порчу и охраняли людей, скот и жилища. По одной из догадок, животных замуровывали в стены как защиту: чтобы болезнь, зло и чужой взгляд не вошли в дом. В те же годы, в той же Пенсильвании, в таких проклятиях видели причину настоящих убийств, и люди умирали из-за веры в них.</p>
+    <p>Горькая ирония в том, что талисман от болезней годами отравлял тех, кто пришёл позже. Защита, которую когда-то выстроили для кого-то, стала болезнью для других.</p>
+    <hr>
+    <p class="first">Кто они были, те, что аккуратно заворачивали мёртвых в газеты и закрывали стену? Чего они так боялись? Чего ждали от этой стены и получили ли? Прежние хозяева дома давно ушли, и спросить некого.</p>
+    <p>Остаётся то, что видела только семья. Сначала тихая, обычная комната. Потом отверстие в стене, оттуда тянет сырым и сладким. А там, в темноте, ряд свёртков из старых газет, поставленных так, чтобы стена держалась. Стена держала дом. И, возможно, держала кое-что ещё.</p>
+    <p>Остаётся вопрос, который задаёт себе каждый, кто живёт в старом доме: а что там, за обоями?</p>
+    <p class="mt-12 !indent-0 text-center font-garamond text-base italic text-ash">Рассказ основан на репортажах WNEP и других СМИ 2015 года. Факты взяты из них, а образы и размышления рассказчика художественные. Версия про пау-вау остаётся предположением экспертов.</p>
+  </article>
+
+  <!-- Навигация между главами -->
+  <nav class="mt-16 flex items-center justify-between font-garamond text-xl italic font-semibold" aria-label="Главы">
+    <a href="index.html" class="transition hover:text-ember">‹ В начало</a>
+    <a href="#" class="text-ash transition hover:text-ember" aria-disabled="true">Следующая глава ›</a>
+  </nav>
+
+</main>
+
+<script>
+  // Полоса прогресса чтения
+  const bar = document.getElementById('progress');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+    bar.style.transform = `scaleX(${Math.min(1, p)})`;
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Размер текста
+  const story = document.getElementById('story');
+  let size = Number(localStorage.getItem('nh-size')) || 100;
+  const apply = () => { story.style.fontSize = size + '%'; try { localStorage.setItem('nh-size', size); } catch (e) {} };
+  document.getElementById('bigger').onclick = () => { size = Math.min(140, size + 10); apply(); };
+  document.getElementById('smaller').onclick = () => { size = Math.max(80, size - 10); apply(); };
+  apply();
+</script>
+</body>
+</html>
